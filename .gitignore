@@ -36,3 +36,12 @@ build/
 
 ### Mac OS ###
 .DS_Store
+.idea/vcs.xml
+allure-results/6957e81a-a82a-476a-91df-33ef8a883294-result.json
+allure-results/7b9e426e-e935-4a44-8042-4ac95f22ac56-result.json
+allure-results/8cd8d51d-cc56-4e90-a926-062ffff064dd-container.json
+allure-results/9421f3b8-37a6-4ec7-8a42-91deead998d0-container.json
+allure-results/a3b1a555-a675-4664-a5e3-9fd01fd30666-container.json
+allure-results/b90e5fb0-93e3-48c7-88b5-a992ba4f688a-container.json
+allure-results/f4e0f2c8-b8ca-4719-b8c8-f930e87768ad-container.json
+allure-results/fc97d2c2-af45-44cf-9b3f-64afdc7c2fbd-container.json

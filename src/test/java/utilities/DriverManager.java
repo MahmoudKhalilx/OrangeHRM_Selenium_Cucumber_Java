@@ -2,22 +2,43 @@ package utilities;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverManager {
-    private static WebDriver driver;
+    private static final ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
 
-    public static WebDriver getDriver() {
-        if (driver == null) {
-            driver = new ChromeDriver();
-            driver.manage().window().maximize();
+    public static void setupDriver(String browser)
+    {
+        switch (browser.toLowerCase())
+        {
+            case "chrome":
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("--start-maximized");
+                driverThreadLocal.set(new ChromeDriver(chromeOptions));
+                break;
+            case "firefox":
+                driverThreadLocal.set(new FirefoxDriver());
+                break;
+            default:
+                EdgeOptions options = new EdgeOptions();
+                options.addArguments("--start-maximized");
+                driverThreadLocal.set(new EdgeDriver(options));
         }
-        return driver;
+
+    }
+
+    public static WebDriver getDriver()
+    {
+        return driverThreadLocal.get();
     }
 
     public static void quitDriver() {
-        if (driver != null) {
-            driver.quit();
-            driver = null;
+        if (getDriver() != null) {
+            getDriver().quit();
+            driverThreadLocal.remove();
         }
     }
 }

@@ -23,8 +23,7 @@ public class AdminSteps {
 
     @Given("user navigates to OrangeHRM login page")
     public void userNavigatesToOrangeHrmLoginPage() {
-        loginPage.navigateToLoginPage();
-//        throw new io.cucumber.java.PendingException();
+       // loginPage.navigateToLoginPage();
     }
 
     @When("user enters username {string} and password {string}")

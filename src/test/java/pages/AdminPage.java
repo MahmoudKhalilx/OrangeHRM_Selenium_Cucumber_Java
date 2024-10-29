@@ -112,8 +112,6 @@ public class AdminPage  extends BasePage{
 
     public void fillNewUserDetails(String username,String Pass){
 
-
-
         new BasePage(driver)
                 .ClickAction(StatusDropdown);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'Enabled')]"))).click();
@@ -138,8 +136,7 @@ public class AdminPage  extends BasePage{
     }
 
     public void clickSaveButton() {
-        saveButton.click();
-        wait.until(ExpectedConditions.invisibilityOf(saveButton));
+        new BasePage(driver).ClickAction(saveButton);
     }
 
     public boolean verifyRecordCountIncreased() {
