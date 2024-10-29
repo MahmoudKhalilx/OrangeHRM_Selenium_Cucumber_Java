@@ -10,6 +10,13 @@ import org.testng.Assert;
 public class AdminPage  extends BasePage{
 
 
+    @FindBy(xpath = "//a[@href='/web/index.php/pim/viewPimModule']//span")
+    private WebElement PIMMenu;
+
+    @FindBy(xpath = "(//div[@role='row'])[2]//div[@role='cell'][3]")
+    private WebElement getEmployeeName;
+
+
     @FindBy(css = "a[href='/web/index.php/admin/viewAdminModule']")
     private WebElement adminMenu;
 
@@ -62,15 +69,15 @@ public class AdminPage  extends BasePage{
     @FindBy(xpath = "(//button[normalize-space()='Reset'])[1]")
     private WebElement ResetFilterButton;
 
-    @FindBy(xpath = "//span[contains(text(),'Peter')]")
-    private WebElement EmployeeNameText
-    ;
+//    @FindBy(xpath = dynamicXpathEmployeeNameText)
+//    private WebElement EmployeeNameText
+//    ;
+
 
     private int initialRecordCount;
 
-
-
-
+     String employee;
+    String dynamicXpathEmployeeNameText;
 
     public AdminPage(WebDriver driver) {
         super(driver);
@@ -85,6 +92,18 @@ public class AdminPage  extends BasePage{
     public void clickAdminMenu() {
         wait.until(ExpectedConditions.elementToBeClickable(adminMenu)).click();
     }
+    public void clickPIMMenu() {
+        wait.until(ExpectedConditions.elementToBeClickable(PIMMenu)).click();
+    }
+
+    public void getNameEmployee(){
+        wait.until(ExpectedConditions.visibilityOf(getEmployeeName));
+        BasePage.scrolling(driver, getEmployeeName);
+        employee=getEmployeeName.getText();
+        System.out.println(employee);
+        ;
+    }
+
 
     public int getRecordsCount() {
         wait.until(ExpectedConditions.visibilityOf(recordsCount));
@@ -111,19 +130,23 @@ public class AdminPage  extends BasePage{
     }
 
     public void fillNewUserDetails(String username,String Pass){
+//        if (employee == null || employee.isEmpty()) {
+//            getNameEmployee();
+//        }
+        dynamicXpathEmployeeNameText = "//span[contains(text(),'" + employee + "')]";
+
 
         new BasePage(driver)
                 .ClickAction(StatusDropdown);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'Enabled')]"))).click();
-
+        wait.until(ExpectedConditions
+                .presenceOfElementLocated(By.xpath("//span[contains(text(),'Enabled')]"))).click();
 
         new BasePage(driver)
-                .SentKeyAction(employeeNameInput,"Peter")
-                .ClickAction(EmployeeNameText)
+                .SentKeyAction(employeeNameInput,employee)
+                .ClickAction(driver.findElement(By.xpath(dynamicXpathEmployeeNameText)))
                 .SentKeyAction(usernameInput,username)
                 .SentKeyAction(passwordInput,Pass)
                 .SentKeyAction(confirmPasswordInput,Pass)
-
         ;
 
 

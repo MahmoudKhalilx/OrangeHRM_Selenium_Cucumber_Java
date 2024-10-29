@@ -4,7 +4,8 @@ Feature: Admin User Management
     When user enters username "Admin" and password "admin123"
     And clicks on login button
     Then user should be logged in successfully
-    When user clicks on Admin menu
+    When user clicks on PIM menu to get Employee Name
+    Then user clicks on Admin menu
     And gets initial record count
     And clicks on Add button
     Then Verify Add User Is Displayed

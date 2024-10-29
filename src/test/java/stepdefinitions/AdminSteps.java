@@ -43,9 +43,15 @@ public class AdminSteps {
         adminPage.assertAdminMenuIsClickable();
     }
 
-    @When("user clicks on Admin menu")
+    @Then("user clicks on Admin menu")
     public void clickOnAdminMenu() {
         adminPage.clickAdminMenu();
+    }
+
+    @When("user clicks on PIM menu to get Employee Name")
+    public void clickOnPIMMenu() {
+        adminPage.clickPIMMenu();
+        adminPage.getNameEmployee();
     }
 
     @And("gets initial record count")
