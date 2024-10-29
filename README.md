@@ -38,4 +38,7 @@ The automated test script performs the following sequence of steps:
    - Execute the test class directly from your IDE or use the Maven command:
      ```sh
      mvn clean test
+
+     allure serve target/allure-results
+
      ``
